@@ -28,8 +28,8 @@ export default function MealsNavigator() {
       />
       <Stack.Screen 
         name="CategoryMeals" 
-        component={CategoryMealsScreen} 
-        options={{ title: 'Category Meals' }}
+        component={CategoryMealsScreen}
+        options={({ route }) => ({ title: route.params.categoryTitle })}
       />
       <Stack.Screen 
         name="MealDetail" 

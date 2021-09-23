@@ -6,10 +6,13 @@ import colors from '../constants/colors'
 
 const CategoriesScreen = ({ navigation }) => {
 
-  const handleNavigation = () => {
+  const handleNavigation = (title) => {
     navigation.dispatch(
       CommonActions.navigate({
         name: 'CategoryMeals',
+        params: {
+          categoryTitle: title
+        }
       })
     )
   }
@@ -19,7 +22,7 @@ const CategoriesScreen = ({ navigation }) => {
       <ScrollView contentContainerStyle={styles.list}>
         {
           CATEGORIES.map((item) => (
-            <TouchableOpacity key={item.id} onPress={handleNavigation} style={styles.gridItem}>
+            <TouchableOpacity key={item.id} onPress={() => { handleNavigation(item.title) }} style={styles.gridItem}>
               <View>
                 <Text style={styles.gridItemText}>{item.title}</Text>
               </View>
