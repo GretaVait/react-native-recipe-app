@@ -4,7 +4,7 @@ import colors from '../constants/colors'
 
 const CategoryGridItem = ({ item, onSelect }) => {
   return (
-    <TouchableOpacity onPress={() => { onSelect(item.title) }} style={styles.gridItem} activeOpacity={0.8}>
+    <TouchableOpacity onPress={() => { onSelect(item.title, item.id) }} style={styles.gridItem} activeOpacity={0.8}>
       <View>
         <Text style={styles.gridItemText}>{item.title}</Text>
       </View>

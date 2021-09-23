@@ -1,18 +1,24 @@
+// Base
 import React from 'react'
-import { View, Text, Button, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
+import { View, StyleSheet, ScrollView } from 'react-native'
+// Navigation
 import { CommonActions } from '@react-navigation/native'
+// Data
 import { CATEGORIES } from '../data/dummy-data'
+// Const
 import colors from '../constants/colors'
+// Comp
 import CategoryGridItem from '../components/CategoryGridItem'
 
 const CategoriesScreen = ({ navigation }) => {
 
-  const handleNavigation = (title) => {
+  const handleNavigation = (title, id) => {
     navigation.dispatch(
       CommonActions.navigate({
         name: 'CategoryMeals',
         params: {
-          categoryTitle: title
+          categoryTitle: title,
+          categoryId: id
         }
       })
     )

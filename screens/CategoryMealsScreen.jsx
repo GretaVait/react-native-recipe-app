@@ -1,35 +1,34 @@
+// Base
 import React from 'react'
-import { View, Text, StyleSheet, Button } from 'react-native'
-import { CommonActions } from '@react-navigation/native'
-import { CATEGORIES } from '../data/dummy-data'
+import { View, StyleSheet, FlatList  } from 'react-native'
+// Data
+import { MEALS } from '../data/dummy-data'
+// Comp
+import MealItem from '../components/MealItem'
 
 const CategoryMealScreen = ({ navigation, route }) => {
-  // const catId = route.params.categoryId
+  const catId = route.params.categoryId
+  const displayedMeals = MEALS.filter(meal => meal.categoryIds.indexOf(catId) >= 0)
 
-  // const selectedCategory = CATEGORIES.find(cat => cat.id === catId)
-
+  const renderMealItem = (itemData) => {
+    return (
+      <MealItem itemData={itemData} onSelectMeal={() => {}} />
+    )
+  }
+  
   return (
     <View style={styles.screen}>
-      <Text>The category meals screen</Text>
-      <Button 
-        title="Go to Meals" 
-        onPress={() =>
-          navigation.dispatch(
-            CommonActions.navigate({
-              name: 'MealDetail',
-            })
-          )
-        }
-      />
-      <Button title="Go Back" onPress={() => { navigation.goBack() }} />
+      <FlatList data={displayedMeals} renderItem={renderMealItem} />
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   screen: {
-    flex: 1
-  }
+    flex: 1,
+    paddingHorizontal: 16,
+    paddingVertical: 48
+  },
 })
 
 export default CategoryMealScreen
