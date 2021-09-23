@@ -1,37 +1,40 @@
 import React from 'react'
-import { View, Text, Button, StyleSheet, FlatList } from 'react-native'
+import { View, Text, Button, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
 import { CommonActions } from '@react-navigation/native'
 import { CATEGORIES } from '../data/dummy-data'
-import { ScrollView } from 'react-native-gesture-handler'
+import colors from '../constants/colors'
 
 const CategoriesScreen = ({ navigation }) => {
 
-  const renderGridItem = (itemData) => {
-    return (
-      <View style={styles.gridItem}>
-        <Text>{itemData.item.title}</Text>
-      </View>
+  const handleNavigation = () => {
+    navigation.dispatch(
+      CommonActions.navigate({
+        name: 'CategoryMeals',
+      })
     )
   }
 
   return (
-    // <FlatList 
-    //   contentContainerStyle={styles.list}
-    //   data={CATEGORIES} 
-    //   renderItem={renderGridItem} 
-    // />
     <View style={styles.screen}>
       <ScrollView contentContainerStyle={styles.list}>
         {
           CATEGORIES.map((item) => (
-            <View style={styles.gridItem} key={item.id}>
-              <Text>{item.title}</Text>
-            </View>
+            <TouchableOpacity key={item.id} onPress={handleNavigation} style={styles.gridItem}>
+              <View>
+                <Text style={styles.gridItemText}>{item.title}</Text>
+              </View>
+            </TouchableOpacity>
           ))
         }
       </ScrollView>
     </View>
   )
+}
+
+CategoriesScreen.navigationOptions = {
+  headerStyle: {
+    backgroundColor: colors.black
+  }
 }
 
 const styles = StyleSheet.create({
@@ -47,8 +50,11 @@ const styles = StyleSheet.create({
   gridItem: {
     margin: 8,
     padding: 16,
-    backgroundColor: 'green',
+    backgroundColor: colors.primary,
     borderRadius: 8
+  },
+  gridItemText: {
+    color: colors.white,
   }
 })
 

@@ -11,7 +11,7 @@ const CategoryMealScreen = ({ navigation }) => {
         onPress={() =>
           navigation.dispatch(
             CommonActions.navigate({
-              name: 'Meal Detail',
+              name: 'MealDetail',
             })
           )
         }
