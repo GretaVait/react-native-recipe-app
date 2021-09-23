@@ -28,13 +28,13 @@ export default function MealsNavigator() {
       />
       <Stack.Screen 
         name="CategoryMeals" 
-        component={CategoryMealsScreen}
+        component={CategoryMealsScreen} 
         options={({ route }) => ({ title: route.params.categoryTitle })}
       />
       <Stack.Screen 
         name="MealDetail" 
         component={MealDetailScreen} 
-        options={{ title: 'Meal Detail' }}
+        options={({ route }) => ({ title: route.params.mealTitle })}
       />
     </Stack.Navigator>
   );

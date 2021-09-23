@@ -1,6 +1,8 @@
 // Base
 import React from 'react'
 import { View, StyleSheet, FlatList  } from 'react-native'
+// Navigation
+import { CommonActions } from '@react-navigation/native'
 // Data
 import { MEALS } from '../data/dummy-data'
 // Comp
@@ -10,9 +12,21 @@ const CategoryMealScreen = ({ navigation, route }) => {
   const catId = route.params.categoryId
   const displayedMeals = MEALS.filter(meal => meal.categoryIds.indexOf(catId) >= 0)
 
+  const handleNavigation = (id, title) => {
+    navigation.dispatch(
+      CommonActions.navigate({
+        name: 'MealDetail',
+        params: {
+          mealId: id,
+          mealTitle: title
+        }
+      })
+    )
+  }
+
   const renderMealItem = (itemData) => {
     return (
-      <MealItem itemData={itemData} onSelectMeal={() => {}} />
+      <MealItem itemData={itemData} onSelectMeal={() => { handleNavigation(itemData.item.id, itemData.item.title) }} />
     )
   }
   
