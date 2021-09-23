@@ -3,6 +3,7 @@ import { View, Text, Button, StyleSheet, TouchableOpacity, ScrollView } from 're
 import { CommonActions } from '@react-navigation/native'
 import { CATEGORIES } from '../data/dummy-data'
 import colors from '../constants/colors'
+import CategoryGridItem from '../components/CategoryGridItem'
 
 const CategoriesScreen = ({ navigation }) => {
 
@@ -22,11 +23,7 @@ const CategoriesScreen = ({ navigation }) => {
       <ScrollView contentContainerStyle={styles.list}>
         {
           CATEGORIES.map((item) => (
-            <TouchableOpacity key={item.id} onPress={() => { handleNavigation(item.title) }} style={styles.gridItem}>
-              <View>
-                <Text style={styles.gridItemText}>{item.title}</Text>
-              </View>
-            </TouchableOpacity>
+            <CategoryGridItem item={item} onSelect={handleNavigation} key={item.id} />
           ))
         }
       </ScrollView>
@@ -50,15 +47,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
-  gridItem: {
-    margin: 8,
-    padding: 16,
-    backgroundColor: colors.primary,
-    borderRadius: 8
-  },
-  gridItemText: {
-    color: colors.white,
-  }
 })
 
 export default CategoriesScreen
