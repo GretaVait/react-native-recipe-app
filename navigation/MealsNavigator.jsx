@@ -11,8 +11,8 @@ export default function MealsNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Categories" component={CategoriesScreen} />
-      <Stack.Screen name="CategoryMeals" component={CategoryMealsScreen} />
-      <Stack.Screen name="MealDetail" component={MealDetailScreen} />
+      <Stack.Screen name="Category Meals" component={CategoryMealsScreen} />
+      <Stack.Screen name="Meal Detail" component={MealDetailScreen} />
     </Stack.Navigator>
   );
 }

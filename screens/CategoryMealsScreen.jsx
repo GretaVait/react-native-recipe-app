@@ -1,10 +1,22 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Button } from 'react-native'
+import { CommonActions } from '@react-navigation/native'
 
-const CategoryMealScreen = () => {
+const CategoryMealScreen = ({ navigation }) => {
   return (
     <View style={styles.screen}>
       <Text>The category meals screen</Text>
+      <Button 
+        title="Go to Meals" 
+        onPress={() =>
+          navigation.dispatch(
+            CommonActions.navigate({
+              name: 'Meal Detail',
+            })
+          )
+        }
+      />
+      <Button title="Go Back" onPress={() => { navigation.goBack() }} />
     </View>
   )
 }
