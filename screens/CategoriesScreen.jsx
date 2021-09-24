@@ -1,6 +1,6 @@
 // Base
 import React from 'react'
-import { View, StyleSheet, ScrollView } from 'react-native'
+import { View, StyleSheet, ScrollView, Text } from 'react-native'
 // Navigation
 import { CommonActions } from '@react-navigation/native'
 // Data

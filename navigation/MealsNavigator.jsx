@@ -1,17 +1,24 @@
 import React from 'react'
-import { Text, Button } from 'react-native'
+import { Platform } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { Ionicons } from '@expo/vector-icons'
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 
 import CategoriesScreen from '../screens/CategoriesScreen'
 import CategoryMealsScreen from '../screens/CategoryMealsScreen'
 import MealDetailScreen from '../screens/MealDetailScreen'
+import FiltersScreen from '../screens/FiltersScreen'
+import FavouritesScreen from '../screens/FavouritesScreen'
+
 import colors from '../constants/colors'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 import HeaderFaveBtn from '../components/HeaderFaveBtn'
 
 const Stack = createStackNavigator()
+const Tabs = Platform.OS === 'android' ? createMaterialBottomTabNavigator() : createBottomTabNavigator()
 
-export default function MealsNavigator() {
+const CategoriesStack = () => {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -41,13 +48,54 @@ export default function MealsNavigator() {
           title: route.params.mealTitle,
           headerRight: () => (
             <HeaderButtons HeaderButtonComponent={HeaderFaveBtn}>
-              <Item title="Favourite" iconName="ios-star" onPress={() => {
+              <Item title="Favourite" iconName="star-outline" onPress={() => {
                 alert('mark as fave')
               }} />
             </HeaderButtons>
           )
         })}
+
       />
     </Stack.Navigator>
+  )
+} 
+
+export default function MealsNavigator() {
+  return (
+    <Tabs.Navigator
+      barStyle={{ backgroundColor: colors.black }}
+      shifting={true}
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: colors.white,
+        },
+        headerTitleStyle: {
+          fontWeight: 'bold',
+          color: colors.black
+        },
+      }}
+    >
+      <Tabs.Screen name="Filter" component={FiltersScreen} options={{ 
+        tabBarIcon: (tabInfo) => {
+          return <Ionicons name="filter" size={24} color={tabInfo.tabBarActiveTintColor} />
+        },
+        // tabBarColor: colors.primaryOpacity
+      }}/>
+      <Tabs.Screen name="Home" component={CategoriesStack} options={{ 
+        headerShown: false,
+        tabBarLabel: 'Categories',
+        tabBarIcon: (tabInfo) => {
+          return <Ionicons name="restaurant" size={24} />
+        },
+        // tabBarColor: colors.primary
+      }} />
+      <Tabs.Screen name="Favourites" component={FavouritesScreen} options={{ 
+        tabBarLabel: 'Faves',
+        tabBarIcon: (tabInfo) => {
+          return <Ionicons name="star" size={24} />
+        },
+        // tabBarColor: colors.black
+      }} />
+    </Tabs.Navigator>
   );
 }
