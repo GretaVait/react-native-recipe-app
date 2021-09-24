@@ -83,13 +83,13 @@ const FavouritesStack = () => {
         component={MealDetailScreen} 
         options={({ route }) => ({ 
           title: route.params.mealTitle,
-          headerRight: () => (
-            <HeaderButtons HeaderButtonComponent={HeaderFaveBtn}>
-              <Item title="Favourite" iconName="star-outline" onPress={() => {
-                alert('mark as fave')
-              }} />
-            </HeaderButtons>
-          )
+          // headerRight: () => (
+          //   <HeaderButtons HeaderButtonComponent={HeaderFaveBtn}>
+          //     <Item title="Favourite" iconName="star-outline" onPress={() => {
+          //       alert('mark as fave')
+          //     }} />
+          //   </HeaderButtons>
+          // )
         })}
 
       />
@@ -114,24 +114,24 @@ export default function MealsNavigator() {
     >
       <Tabs.Screen name="FilterTab" component={FiltersScreen} options={{ 
         tabBarLabel: 'Filter',
-        tabBarIcon: (tabInfo) => {
-          return <Ionicons name="filter" size={24} color={tabInfo.tabBarActiveTintColor} />
-        },
+        // tabBarIcon: (tabInfo) => {
+        //   return <Ionicons name="filter" size={24} color={tabInfo.tabBarActiveTintColor} />
+        // },
         // tabBarColor: colors.primaryOpacity
       }}/>
       <Tabs.Screen name="HomeTab" component={CategoriesStack} options={{ 
         headerShown: false,
         tabBarLabel: 'Categories',
-        tabBarIcon: (tabInfo) => {
-          return <Ionicons name="restaurant" size={24} />
-        },
+        // tabBarIcon: (tabInfo) => {
+        //   return <Ionicons name="restaurant" size={24} />
+        // },
         // tabBarColor: colors.primary
       }} />
       <Tabs.Screen name="FavouritesTab" component={FavouritesStack} options={{ 
         tabBarLabel: 'Faves',
-        tabBarIcon: (tabInfo) => {
-          return <Ionicons name="star" size={24} />
-        },
+        // tabBarIcon: (tabInfo) => {
+        //   return <Ionicons name="star" size={24} />
+        // },
         // tabBarColor: colors.black
       }} />
     </Tabs.Navigator>
