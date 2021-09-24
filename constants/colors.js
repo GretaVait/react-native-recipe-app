@@ -4,5 +4,6 @@ export default {
   white: '#FFF',
   black: '#172734',
   blackOpacity: 'rgba(23, 39, 52, 0.4)',
-  grey: '#AAA'
+  grey: '#AAA',
+  orange: '#F9924C'
 }
