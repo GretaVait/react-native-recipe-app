@@ -60,6 +60,43 @@ const CategoriesStack = () => {
   )
 } 
 
+const FavouritesStack = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: colors.white,
+        },
+        headerTitleStyle: {
+          fontWeight: 'bold',
+          color: colors.black
+        },
+      }}
+    >
+      <Stack.Screen 
+        name="Favourites" 
+        component={FavouritesScreen} 
+        options={{ title: 'Your Favourites' }}
+      />
+      <Stack.Screen 
+        name="MealDetail" 
+        component={MealDetailScreen} 
+        options={({ route }) => ({ 
+          title: route.params.mealTitle,
+          headerRight: () => (
+            <HeaderButtons HeaderButtonComponent={HeaderFaveBtn}>
+              <Item title="Favourite" iconName="star-outline" onPress={() => {
+                alert('mark as fave')
+              }} />
+            </HeaderButtons>
+          )
+        })}
+
+      />
+    </Stack.Navigator>
+  )
+}
+
 export default function MealsNavigator() {
   return (
     <Tabs.Navigator
@@ -75,13 +112,14 @@ export default function MealsNavigator() {
         },
       }}
     >
-      <Tabs.Screen name="Filter" component={FiltersScreen} options={{ 
+      <Tabs.Screen name="FilterTab" component={FiltersScreen} options={{ 
+        tabBarLabel: 'Filter',
         tabBarIcon: (tabInfo) => {
           return <Ionicons name="filter" size={24} color={tabInfo.tabBarActiveTintColor} />
         },
         // tabBarColor: colors.primaryOpacity
       }}/>
-      <Tabs.Screen name="Home" component={CategoriesStack} options={{ 
+      <Tabs.Screen name="HomeTab" component={CategoriesStack} options={{ 
         headerShown: false,
         tabBarLabel: 'Categories',
         tabBarIcon: (tabInfo) => {
@@ -89,7 +127,7 @@ export default function MealsNavigator() {
         },
         // tabBarColor: colors.primary
       }} />
-      <Tabs.Screen name="Favourites" component={FavouritesScreen} options={{ 
+      <Tabs.Screen name="FavouritesTab" component={FavouritesStack} options={{ 
         tabBarLabel: 'Faves',
         tabBarIcon: (tabInfo) => {
           return <Ionicons name="star" size={24} />
