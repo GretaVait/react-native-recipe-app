@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from 'react-native'
 
 import * as Font from 'expo-font'
 import AppLoading from 'expo-app-loading'
+import { AppProvider } from './context/AppContext'
 
 
 import MealsNavigator from './navigation/MealsNavigator'
@@ -14,8 +15,10 @@ enableScreens()
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <MealsNavigator />
-    </NavigationContainer>
+    <AppProvider>
+      <NavigationContainer>
+        <MealsNavigator />
+      </NavigationContainer>
+    </AppProvider>
   );
 }

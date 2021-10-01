@@ -13,6 +13,7 @@ const MealItem = ({ itemData, onSelectMeal }) => {
           <View style={styles.banner}>
             <Text style={styles.title}>{itemData.item.title}</Text>
             <Text style={styles.subtitle}>{itemData.item.affordability} | {itemData.item.complexity} | {itemData.item.duration} min</Text>
+            <Text style={styles.subtitle}>{itemData.item.isGlutenFree && 'Gluten-free ||'} {itemData.item.isVegan && 'Vegan ||'} {itemData.item.isVegeterian && 'Vegeterian ||'} {itemData.item.isLactoseFree && 'Lactose-free'}</Text>
           </View>
         </ImageBackground>
       </View>
