@@ -1,13 +1,14 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
+import { useContext } from 'react/cjs/react.development'
 import MealList from '../components/MealList'
-import { MEALS } from '../data/dummy-data'
+import { AppContext } from '../context/AppContext'
 
 const FavouritesScreen = ({ navigation }) => {
-  const faveMeals = MEALS.filter(meal => meal.id === 'm1' || meal.id === 'm2')
+  const { favouriteMeals } = useContext(AppContext)
 
   return (
-    <MealList data={faveMeals} navigation={navigation} />
+    <MealList data={favouriteMeals} navigation={navigation} />
   )
 }
 

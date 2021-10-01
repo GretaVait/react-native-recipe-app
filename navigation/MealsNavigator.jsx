@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Platform, Button } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
@@ -15,12 +15,28 @@ import colors from '../constants/colors'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 import HeaderFaveBtn from '../components/HeaderFaveBtn'
 
+import { MEALS } from '../data/dummy-data'
+
 import { AppContext } from '../context/AppContext'
 
 const Stack = createStackNavigator()
 const Tabs = Platform.OS === 'android' ? createMaterialBottomTabNavigator() : createBottomTabNavigator()
 
 const CategoriesStack = () => {
+  const { favouriteMeals, saveFavouriteMeal } = useContext(AppContext)
+  const [buttonTitle, setButtonTitle] = useState('Not Fave')
+
+  const handleSaveFavouriteMeal = (id) => {
+    const existingIndex = favouriteMeals.findIndex(meal => meal.id === id)
+    if (existingIndex >= 0) {
+      const updatedFavMeals = [...favouriteMeals]
+      updatedFavMeals.splice(existingIndex, 1)
+      saveFavouriteMeal(updatedFavMeals)
+    } else {
+      saveFavouriteMeal([...favouriteMeals, MEALS.find(meal => meal.id === id)])
+    }
+  }
+
   return (
     <Stack.Navigator
       screenOptions={{
@@ -50,23 +66,28 @@ const CategoriesStack = () => {
           title: route.params.mealTitle,
           headerRight: () => (
             <HeaderButtons HeaderButtonComponent={HeaderFaveBtn}>
-              {/* <Item title="Favourite" iconName="star-outline" onPress={() => {
-                alert('mark as fave')
-              }} /> */}
-              <Button title="Fave" onPress={() => {
-                alert('mark as fave')
-              }} />
+              <Button title={buttonTitle} onPress={() => { handleSaveFavouriteMeal(route.params.mealId); setButtonTitle(favouriteMeals.findIndex(meal => meal.id === route.params.mealId) >= 0 ? 'Not Fave' : 'Fave') }} />
             </HeaderButtons>
           )
         })}
-
       />
     </Stack.Navigator>
   )
-} 
-
+}
 
 const FavouritesStack = () => {
+  const { favouriteMeals, saveFavouriteMeal } = useContext(AppContext)
+
+  const handleSaveFavouriteMeal = (id) => {
+    const existingIndex = favouriteMeals.findIndex(meal => meal.id === id)
+    if (existingIndex >= 0) {
+      const updatedFavMeals = [...favouriteMeals]
+      updatedFavMeals.splice(existingIndex, 1)
+      saveFavouriteMeal(updatedFavMeals)
+    } else {
+      saveFavouriteMeal([...favouriteMeals, MEALS.find(meal => meal.id === id)])
+    }
+  }
 
   return (
     <Stack.Navigator
@@ -90,13 +111,11 @@ const FavouritesStack = () => {
         component={MealDetailScreen} 
         options={({ route }) => ({ 
           title: route.params.mealTitle,
-          // headerRight: () => (
-          //   <HeaderButtons HeaderButtonComponent={HeaderFaveBtn}>
-          //     <Item title="Favourite" iconName="star-outline" onPress={() => {
-          //       alert('mark as fave')
-          //     }} />
-          //   </HeaderButtons>
-          // )
+          headerRight: () => (
+            <HeaderButtons HeaderButtonComponent={HeaderFaveBtn}>
+              <Button title="Fave" onPress={() => { handleSaveFavouriteMeal(route.params.mealId) }} />
+            </HeaderButtons>
+          )
         })}
 
       />

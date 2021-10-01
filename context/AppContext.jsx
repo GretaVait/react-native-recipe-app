@@ -2,6 +2,8 @@ import React, { useState, createContext } from 'react'
 
 export const AppContext = createContext()
 
+import { MEALS } from '../data/dummy-data'
+
 export const AppProvider = (props) => {
 
   const [filtersData, setFiltersData] = useState({
@@ -23,8 +25,12 @@ export const AppProvider = (props) => {
     setFilteredMeals(values)
   }
 
+  const saveFavouriteMeal = (values) => {
+    setFavouriteMeals(values)
+  }
+
   return (
-    <AppContext.Provider value={{ filtersData, saveFilters, filteredMeals, saveFilteredMeals }}>
+    <AppContext.Provider value={{ filtersData, saveFilters, filteredMeals, saveFilteredMeals, favouriteMeals, saveFavouriteMeal }}>
       {props.children}
     </AppContext.Provider>
   )

@@ -1,13 +1,16 @@
 // Base
-import React from 'react'
+import React, { useContext } from 'react'
 import { View, Text, FlatList, StyleSheet } from 'react-native'
 // Navigation
 import { CommonActions } from '@react-navigation/native'
 // Comp
 import MealItem from './MealItem'
+import { AppContext } from '../context/AppContext'
+import { useEffect } from 'react/cjs/react.development'
 
 const MealList = ({ data, navigation }) => {
-
+  const { favouriteMeals } = useContext(AppContext)
+ 
   const handleNavigation = (id, title) => {
     navigation.dispatch(
       CommonActions.navigate({
